@@ -1,44 +1,33 @@
-﻿namespace Oryn.Maui.Font.Poppins
+﻿namespace HandKit.Maui.Poppins
 {
     /// <summary>
-    /// Provides extension methods for adding Poppins fonts to an IFontCollection.
+    /// Provides extension methods to easily integrate Poppins fonts into .NET MAUI applications.
     /// </summary>
     public static class FontExtensions
     {
         /// <summary>
-        /// Add font to global. using: FontFamily="Regular" *(Italic, Medium, SemiBold, Bold, etc..)
+        /// Registers the Poppins fonts in the MAUI application.
+        /// <code>
+        /// Font Family: Regular, Italic, Medium, SemiBold, Bold, MediumItalic, SemiBoldItalic, BoldItalic
+        /// </code>
         /// </summary>
-        /// <param name="fonts">The font collection to add fonts to.</param>
-        /// <returns>The updated font collection.</returns>
-        public static IFontCollection AddPoppinsFonts(this IFontCollection fonts)
+        /// <param name="builder">The <see cref="MauiAppBuilder"/> to configure.</param>
+        /// <param name="name">Optional alias prefix. If provided (e.g., "Poppins"), use FontFamily="PoppinsRegular". If empty, use FontFamily="Regular".</param>
+        /// <returns><see cref="MauiAppBuilder"/></returns>
+        public static MauiAppBuilder UsePoppinsFonts(this MauiAppBuilder builder, string name = "")
         {
-            fonts.AddFont($"{nameof(FontAliases.PoppinsRegular)}.ttf", FontAliases.PoppinsRegular);
-            fonts.AddFont($"{nameof(FontAliases.PoppinsItalic)}.ttf", FontAliases.PoppinsItalic);
-            fonts.AddFont($"{nameof(FontAliases.PoppinsMedium)}.ttf", FontAliases.PoppinsMedium);
-            fonts.AddFont($"{nameof(FontAliases.PoppinsMediumItalic)}.ttf", FontAliases.PoppinsMediumItalic);
-            fonts.AddFont($"{nameof(FontAliases.PoppinsSemiBold)}.ttf", FontAliases.PoppinsSemiBold);
-            fonts.AddFont($"{nameof(FontAliases.PoppinsSemiBoldItalic)}.ttf", FontAliases.PoppinsSemiBoldItalic);
-            fonts.AddFont($"{nameof(FontAliases.PoppinsBold)}.ttf", FontAliases.PoppinsBold);
-            fonts.AddFont($"{nameof(FontAliases.PoppinsBoldItalic)}.ttf", FontAliases.PoppinsBoldItalic);
-            return fonts;
-        }
-
-        /// <summary>
-        /// Add font to partial. using: FontFamily="PoppinsRegular" *(PoppinsItalic, PoppinsMedium, PoppinsSemiBold, PoppinsBold, etc..)
-        /// </summary>
-        /// <param name="fonts">The font collection to add fonts to.</param>
-        /// <returns>The updated font collection.</returns>
-        public static IFontCollection AddPoppinsFontsPartial(this IFontCollection fonts)
-        {
-            fonts.AddFont($"{nameof(FontAliases.PoppinsRegular)}.ttf", nameof(FontAliases.PoppinsRegular));
-            fonts.AddFont($"{nameof(FontAliases.PoppinsItalic)}.ttf", nameof(FontAliases.PoppinsItalic));
-            fonts.AddFont($"{nameof(FontAliases.PoppinsMedium)}.ttf", nameof(FontAliases.PoppinsMedium));
-            fonts.AddFont($"{nameof(FontAliases.PoppinsMediumItalic)}.ttf", nameof(FontAliases.PoppinsMediumItalic));
-            fonts.AddFont($"{nameof(FontAliases.PoppinsSemiBold)}.ttf", nameof(FontAliases.PoppinsSemiBold));
-            fonts.AddFont($"{nameof(FontAliases.PoppinsSemiBoldItalic)}.ttf", nameof(FontAliases.PoppinsSemiBoldItalic));
-            fonts.AddFont($"{nameof(FontAliases.PoppinsBold)}.ttf", nameof(FontAliases.PoppinsBold));
-            fonts.AddFont($"{nameof(FontAliases.PoppinsBoldItalic)}.ttf", nameof(FontAliases.PoppinsBoldItalic));
-            return fonts;
+            builder.ConfigureFonts(fonts =>
+            {
+                fonts.AddFont("PoppinsRegular.ttf", $"{name}Regular");
+                fonts.AddFont("PoppinsItalic.ttf", $"{name}Italic");
+                fonts.AddFont("PoppinsMedium.ttf", $"{name}Medium");
+                fonts.AddFont("PoppinsMediumItalic.ttf", $"{name}MediumItalic");
+                fonts.AddFont("PoppinsSemiBold.ttf", $"{name}SemiBold");
+                fonts.AddFont("PoppinsSemiBoldItalic.ttf", $"{name}SemiBoldItalic");
+                fonts.AddFont("PoppinsBold.ttf", $"{name}Bold");
+                fonts.AddFont("PoppinsBoldItalic.ttf", $"{name}BoldItalic");
+            });
+            return builder;
         }
     }
 }
